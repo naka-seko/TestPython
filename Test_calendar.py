@@ -1,12 +1,12 @@
 # カレンダー表示(6/24)
 import calendar
-min_nen = 2000
+min_nen = 1950
 max_nen = 2099
 
 # 対象年入力
 while True:
     try:
-        in_nen = int(input("対象年(2000～2099)"))
+        in_nen = int(input("対象年(1950～2099)"))
         if (in_nen < min_nen) or (in_nen > max_nen):
             continue
         break
