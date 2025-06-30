@@ -1,10 +1,15 @@
 # コレクション Test2 (6/19)
 # 人数を入れる(0～9999)
+end_kensu = 9999 # 終了値
+
 def input_kensu():
     while True:
         try:
-            in_kensu = int(input("(End:9999) "))
-            if (in_kensu < 0) or (in_kensu > 9999):
+            # 0～終了値の範囲で入力を促す
+            # end_dispは表示用の文字列
+            end_disp = f"(0～{end_kensu},End={end_kensu}):"
+            in_kensu = int(input(end_disp))
+            if (in_kensu < 0) or (in_kensu > end_kensu):
                 continue
             else:
                 return (in_kensu)
@@ -37,7 +42,7 @@ while index <= max_index :
     print(index + 1,"日目は何件ですか？")
     in_kensu = input_kensu()
 
-    if(in_kensu == 9999):
+    if(in_kensu == end_kensu):
         if(index == 0):
             values = [0]
         break
@@ -48,4 +53,4 @@ while index <= max_index :
 
 # 算出＆出力
 total,average,number = total_and_average_and_number(values)
-print(values, "の", "合計は", total, "平均は", average, "件数は", number, "です。")
+print(values, "の合計は", total, "平均は", average, "件数は", number, "です。")

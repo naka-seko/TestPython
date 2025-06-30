@@ -1,7 +1,7 @@
 # カレンダー表示(6/24)
 import calendar
-min_nen = 1950
-max_nen = 2099
+min_nen = 1950 # 対象年の最小値
+max_nen = 2099 # 対象年の最大値
 
 # 対象年入力
 while True:

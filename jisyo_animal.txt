@@ -1,0 +1,5 @@
+dog,犬
+cat,猫
+cow,牛
+horse,馬
+parrot,オウム
