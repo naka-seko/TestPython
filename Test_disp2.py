@@ -1,16 +1,4 @@
 # (2025/06/19 Added)
-# ループ(while)　Test Source
-text = ""
-end_text = "finish"
-
-while text != end_text:
-    # 文字を入力する
-    print(end_text)
-    text = input("と入力してください:")
-
-    print(text, "と入力されました。")
-
-print("終了しました。")
 
 # 辞書オブジェクト　Test Source
 def disp_english_words():
@@ -21,7 +9,19 @@ def disp_english_words():
         print(english, ":", dic_word)
 
 # 辞書オブジェクトメイン
-english_words = {"apple": "りんご", "orange": "みかん", "peach": "もも"}
+# テキストファイルから辞書を作成
+english_words = {}
+try:
+    with open("jisyo_fruit.txt", "r", encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+            if not line or "," not in line:
+                continue
+            english, japanese = line.split(",", 1)
+            english_words[english.strip()] = japanese.strip()
+except FileNotFoundError:
+    print("words.txt が見つかりません。空の辞書で開始します。")
+
 disp_english_words()
 
 # 辞書を追加
@@ -38,7 +38,6 @@ disp_english_words()
 
 # 該当辞書を出力
 key = input("英単語を入力してください：")
-
 if(key in english_words) :
     print("日本語：", english_words[key])
 else :
