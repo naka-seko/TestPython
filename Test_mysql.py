@@ -4,7 +4,7 @@ import mysql.connector
 # 接続定義
 sql_host = 'localhost'
 sql_user = 'root'
-sql_password = 'Seko19670614'
+sql_password = '************'
 sql_database = 'mysql'
 # SQLクエリの定義
 sql_sel1 = "SELECT Database_name,Table_name FROM innodb_table_stats"
