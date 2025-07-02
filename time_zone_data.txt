@@ -1,0 +1,6 @@
+China,8
+Japan,9
+Korea,8
+United Kingdom,0
+France,1
+USA(New York),12

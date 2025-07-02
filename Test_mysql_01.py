@@ -3,23 +3,28 @@ import mysql.connector
 # 接続定義
 sql_host = 'localhost'
 sql_user = 'root'
-sql_password = '********'
+sql_password = 'Seko19670614'
 sql_database = 'mysql'
 
-# SQLクエリの定義
-sql_sel1 = "SELECT Name,Time_zone_id FROM time_zone_name"
+# テーブル名とカラム名（例: Name, Time_zone_id）
+table_name = 'time_zone_name'
+columns = ['Name', 'Time_zone_id']
+# テキストファイルパス
+text_file_path = 'time_zone_data.txt'
 
-# データベースの取得、削除、挿入クエリ
-sql_sel2 = "SELECT Name,Time_zone_id FROM time_zone_name WHERE Name=%s"
-sql_upd1 = "UPDATE time_zone_name SET Time_zone_id=%s WHERE Name=%s"
-sql_del1 = "DELETE FROM time_zone_name WHERE Name=%s"
-sql_ins1 = "INSERT INTO time_zone_name(Name,Time_zone_id) VALUES(%s,%s)"
+# テーブルのカラム名を使用して、SQLクエリを定義
+col_str = ','.join(columns)
+# SQLクエリの定義
+sql_sel1 = f"SELECT {col_str} FROM {table_name} ORDER BY {columns[0]}"
+sql_sel2 = f"SELECT {col_str} FROM {table_name} WHERE {columns[0]}=%s"
+sql_upd1 = f"UPDATE {table_name} SET {columns[1]}=%s WHERE {columns[0]}=%s"
+sql_del1 = f"DELETE FROM {table_name} WHERE {columns[0]}=%s"
+sql_ins1 = f"INSERT INTO {table_name}({col_str}) VALUES(%s,%s)"
 
 def input_upd_del():
     while True:
         try:
-            # 0～終了値の範囲で入力を促す
-            # end_dispは表示用の文字列
+            # ここでは削除と更新の選択を促すメッセージを表示
             in_upd_del = input("削除する場合は d を、更新する場合は u を入力して下さい：")
             if (in_upd_del == 'd') or (in_upd_del == 'u'):
                 # 入力が 'd' 又は 'u' の場合はそのまま返す
@@ -90,7 +95,6 @@ if row:
         print(f"Name'{where_name}'は存在します。更新を行います。")
         cursor.execute(sql_upd1, (data_tmid, where_name))
         conn.commit()  # 更新を反映
-
     elif in_upd_del == 'd':
         # 削除を行う
         print(f"Name'{where_name}'は存在します。削除を行います。")
@@ -112,12 +116,12 @@ conn.close()
 
 # データ出力処理(コンソール出力)
 for row in result_list:
-    print(f"Name: {row[0]}, Time_zone_id: {row[1]}")
+    print(', '.join(f"{col}: {val}" for col, val in zip(columns, row)))
 
 # ファイル出力処理(csv形式)
-with open("mysql_tables.txt", "w", encoding="utf-8") as f:
+with open(text_file_path, "w", encoding="utf-8") as f_file:
     for row in result_list:
-        f.write(f"{row[0]},{row[1]}\n")
+        f_file.write(','.join(str(val) for val in row) + "\n")
 
 # ファイル出力完了メッセージ
-print("MySQLのテーブル情報をmysql_tables.txtに出力しました。")
+print(f"MySQLのテーブル情報を{text_file_path}に出力しました。")
