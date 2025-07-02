@@ -3,7 +3,7 @@ import mysql.connector
 # 接続定義
 sql_host = 'localhost'
 sql_user = 'root'
-sql_password = 'Seko19670614'
+sql_password = '************'
 sql_database = 'mysql'
 
 # テーブル名とカラム名（例: Name, Time_zone_id）
