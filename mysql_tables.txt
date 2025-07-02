@@ -1,4 +1,0 @@
-China,8
-Japan,9
-korea,8
-United Kingdom,0
